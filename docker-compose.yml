@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env/development/database
+      - .env/development/web
+    environment:
+      # So that the web service knows where to find the webpack dev server
+      - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
+  redis:
+    image: redis
+  database:
+    image: postgres
+    env_file:
+      - .env/development/database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  webpack-dev-server:
+    build: .
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env/development/database
+      - .env/development/web
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+    ports:
+      - '3035:3035'
+volumes:
+    db_data:
