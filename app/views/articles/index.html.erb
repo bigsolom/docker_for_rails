@@ -1,3 +1,13 @@
 <%= javascript_pack_tag 'hello_react'%>
 
+<% content_for :head do%>
+	  <script type="text/javascript">
+	    document.addEventListener("DOMContentLoaded",function(){
+	      document.getElementsByTagName('h1')[0].append(' ENHANCED!');
+	    });
+	  </script>
+<%end%>
+	
+<h1>This page has been viewed<%=pluralize(@page_hits,'time')%>!</h1>
+
 <h1> React app </h1>
