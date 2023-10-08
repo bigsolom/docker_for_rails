@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - '3000:3000'
+      - '4000:4000' # for testing using selenium
     volumes:
       - .:/usr/src/app
     env_file:
@@ -33,5 +34,11 @@ services:
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
     ports:
       - '3035:3035'
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - '4444:4444'
+      - '7900:7900'
+    shm_size: '2g'
 volumes:
     db_data:
