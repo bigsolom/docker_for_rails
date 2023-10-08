@@ -20,6 +20,9 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 # we don't want any change in files to always re-install the gems
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app
+
+ENV BUNDLE_PATH /gems
+
 RUN bundle install
 
 COPY package.json /usr/src/app/
