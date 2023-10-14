@@ -30,5 +30,6 @@ RUN yarn install --ignore-engines
 
 COPY . /usr/src/app/
 
-
+# docker will rub docker-entrypoint.sh bin/rails s -b 0.0.0.0
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
 CMD [ "bin/rails", "s", "-b", "0.0.0.0" ]
